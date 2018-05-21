@@ -1,0 +1,23 @@
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/node:8.9-browsers
+
+    working_directory: ~/repo
+
+    steps:
+      - checkout
+      - run: sudo npm install -g @angular/cli
+      - run: ng new ng-size-tracking
+      - run: |
+          cd ng-size-tracking
+          ng build --prod
+          for file in dist/ng-size-tracking/*.*; do gzip $file; done
+          ls -lG dist/ng-size-tracking | awk '{ total += $4; print }; END { print total }'
+
+workflows:
+  version: 2
+  pipeline:
+    jobs:
+      - build

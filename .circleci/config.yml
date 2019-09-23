@@ -8,11 +8,10 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo npm install -g @angular/cli
-      - run: ng new ng-size-tracking --interactive=false
       - run: |
+          npx ng new ng-size-tracking --interactive=false
           cd ng-size-tracking
-          ng build --prod
+          npx ng build --prod
           for file in dist/ng-size-tracking/*.*; do gzip -k $file; done
           ls -lG dist/ng-size-tracking | awk '{ total += $4; print }; END { print total }'
 

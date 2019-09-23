@@ -10,10 +10,10 @@ jobs:
       - checkout
       - run: |
           export NG_CLI_ANALYTICS=ci
-          yarn global add @angular/cli	
-          ng new ng-size-tracking --interactive=false	
+          npm install @angular/cli	
+          npx ng new ng-size-tracking --interactive=false	
           cd ng-size-tracking
-          ng build --prod
+          npx ng build --prod
           for file in dist/ng-size-tracking/*.*; do gzip -k $file; done
           ls -lG dist/ng-size-tracking | awk '{ total += $4; print }; END { print total }'
 

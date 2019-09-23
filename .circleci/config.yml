@@ -13,9 +13,10 @@ jobs:
           npm install @angular/cli	
           npx ng new ng-size-tracking --interactive=false	
           cd ng-size-tracking
-          npx ng build --prod
+      - run: |
+          npx ng build --prod --progress=false
           for file in dist/ng-size-tracking/*.*; do gzip -k $file; done
-          ls -lG dist/ng-size-tracking | awk '{ total += $4; print }; END { print total }'
+          ls -lG dist/ng-size-tracking
 
 workflows:
   version: 2

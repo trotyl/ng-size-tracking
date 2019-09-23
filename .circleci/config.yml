@@ -8,9 +8,10 @@ jobs:
 
     steps:
       - checkout
-      - run: sudo npm install -g @angular/cli	
       - run: |
           export NG_CLI_ANALYTICS=ci
+          sudo npm install -g @angular/cli	
+      - run: |
           ng new ng-size-tracking --interactive=false	
       - run: |
           cd ng-size-tracking
